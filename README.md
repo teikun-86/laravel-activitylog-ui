@@ -6,7 +6,7 @@
 [![Latest Version](https://img.shields.io/packagist/v/nsd7/laravel-activitylog-ui.svg)](https://packagist.org/packages/nsd7/laravel-activitylog-ui)
 [![License](https://img.shields.io/github/license/nowshad7/laravel-activitylog-ui.svg)](LICENSE)
 [![Downloads](https://img.shields.io/packagist/dt/nsd7/laravel-activitylog-ui.svg)](https://packagist.org/packages/nsd7/laravel-activitylog-ui)
-[![Author](https://img.shields.io/badge/author-@rap2h-blue.svg)](https://www.linkedin.com/in/rh-nowshad)
+[![Author](https://img.shields.io/badge/author-@RHNowshad-blue.svg)](https://www.linkedin.com/in/rh-nowshad)
 
 ---
 
