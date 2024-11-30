@@ -4,8 +4,9 @@
 **Laravel Activity Log UI** is a **Tailwind CSS-powered user interface** for the popular [Spatie Laravel Activitylog](https://spatie.be/docs/laravel-activitylog/v4/introduction) package. It provides an easy-to-use, customizable dashboard to view and manage activity logs in your Laravel application.
 
 [![Latest Version](https://img.shields.io/packagist/v/nsd7/laravel-activitylog-ui.svg)](https://packagist.org/packages/nsd7/laravel-activitylog-ui)
-[![License](https://img.shields.io/github/license/nsd7/laravel-activitylog-ui.svg)](LICENSE)
+[![License](https://img.shields.io/github/license/nowshad7/laravel-activitylog-ui.svg)](LICENSE)
 [![Downloads](https://img.shields.io/packagist/dt/nsd7/laravel-activitylog-ui.svg)](https://packagist.org/packages/nsd7/laravel-activitylog-ui)
+[![Author](https://img.shields.io/badge/author-@rap2h-blue.svg)](https://www.linkedin.com/in/rh-nowshad)
 
 ---
 
@@ -19,6 +20,12 @@
 - Pagination for large activity logs.
 - Summary statistics for created, updated, and deleted events.
 - **Responsive UI** powered by Tailwind CSS.
+
+---
+
+## Activity Log View
+
+![Activity Log View](screenshots/ui.png)
 
 ---
 
@@ -91,12 +98,6 @@ The package is styled with Tailwind CSS. Ensure your Laravel app has Tailwind co
 
 After installation, visit the dashboard at `/admin/activity-log` to view your activity logs. Use the search and filter options to quickly find specific logs.
 
----
-
-## Example Screenshots
-
-**Activity Log View**  
-![Activity Log View](screenshots/ui.png)
 ---
 
 ## License
