@@ -1,0 +1,29 @@
+{
+    "name": "nsd7/laravel-activitylog-ui",
+    "description": "A Tailwind CSS powered UI for the Spatie/laravel-activitylog package that we all love!",
+    "type": "library",
+    "require": {
+        "spatie/laravel-activitylog": "^4.0",
+        "laravel/framework": "^9.0 || ^10.0 || ^11.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Robiul Hasan Nowshad",
+            "email": "nowshad21aug@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Nsd7\\LaravelActivitylogUi\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Nsd7\\LaravelActivitylogUi\\LaravelActivitylogUiServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "stable"
+}
