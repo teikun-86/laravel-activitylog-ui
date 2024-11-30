@@ -5,7 +5,13 @@ namespace Nsd7\LaravelActivitylogUi\Http\Controllers;
 use Illuminate\Http\Request;
 use Spatie\Activitylog\Models\Activity;
 
-class ActivityLogController extends Controller
+if (class_exists("\\Illuminate\\Routing\\Controller")) {	
+    class BaseController extends \Illuminate\Routing\Controller {}	
+} elseif (class_exists("Laravel\\Lumen\\Routing\\Controller")) {	
+    class BaseController extends \Laravel\Lumen\Routing\Controller {}	
+}
+
+class ActivityLogController extends BaseController
 {
     public function index(Request $request)
     {
