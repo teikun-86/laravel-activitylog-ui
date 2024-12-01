@@ -3,6 +3,7 @@
 namespace Nsd7\LaravelActivitylogUi\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Spatie\Activitylog\Models\Activity;
 
 if (class_exists("\\Illuminate\\Routing\\Controller")) {	
@@ -15,10 +16,24 @@ class ActivityLogController extends BaseController
 {
     public function index(Request $request)
     {
+        $models = Cache::rememberForever('activity_models', function () {
+            return Activity::select('subject_type')
+                ->distinct()
+                ->pluck('subject_type')
+                ->map(fn($type) => class_basename($type))
+                ->toArray();
+        });
+
+        $events = Cache::rememberForever('activity_events', function () {
+            return Activity::select('event')->distinct()->pluck('event')->toArray();
+        });
+
+
         $logs = Activity::query()
-            ->with('causer')
+            ->select(['id', 'description', 'event', 'subject_type', 'subject_id', 'causer_id', 'properties', 'created_at']) // Specify needed columns
+            ->with('causer:id,name')
             ->when($request->search, function ($query, $search) {
-                $query->where('description', 'like', "%{$search}%");
+                $query->whereRaw("MATCH(description) AGAINST(? IN BOOLEAN MODE)", [$search]);
             })
             ->when($request->model, function ($query, $model) {
                 $query->where('subject_type', 'like', "%{$model}%");
@@ -29,25 +44,9 @@ class ActivityLogController extends BaseController
             ->when($request->event, function ($query, $event) {
                 $query->where('event', $event);
             })
-            ->latest()
+            ->orderBy('id', 'desc')
             ->paginate(10);
 
-        $models = Activity::select('subject_type')
-            ->distinct()
-            ->get()
-            ->pluck('subject_type')
-            ->map(fn ($type) => class_basename($type))
-            ->toArray();
-
-        $events = Activity::select('event')
-            ->distinct()
-            ->pluck('event')
-            ->toArray();
-        $logCreatedEvents = Activity::where('event', 'created')->count();
-        $logUpdatedEvents = Activity::where('event', 'updated')->count();
-        $logDeletedEvents = Activity::where('event', 'deleted')->count();
-        $totalLogs = $logCreatedEvents + $logUpdatedEvents + $logDeletedEvents;
-
-        return view('activitylog-ui::activity-log.index', compact('logs', 'models', 'events', 'logCreatedEvents', 'logUpdatedEvents', 'logDeletedEvents','totalLogs'));
+        return view('activitylog-ui::activity-log.index', compact('logs', 'models', 'events'));
     }
 }
