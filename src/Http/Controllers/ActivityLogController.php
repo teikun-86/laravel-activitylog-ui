@@ -3,7 +3,6 @@
 namespace Nsd7\LaravelActivitylogUi\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 use Spatie\Activitylog\Models\Activity;
 
 if (class_exists("\\Illuminate\\Routing\\Controller")) {	
@@ -16,18 +15,13 @@ class ActivityLogController extends BaseController
 {
     public function index(Request $request)
     {
-        $models = Cache::rememberForever('activity_models', function () {
-            return Activity::select('subject_type')
-                ->distinct()
-                ->pluck('subject_type')
-                ->map(fn($type) => class_basename($type))
-                ->toArray();
-        });
+        $models = Activity::select('subject_type')
+            ->distinct()
+            ->pluck('subject_type')
+            ->map(fn($type) => class_basename($type))
+            ->toArray();
 
-        $events = Cache::rememberForever('activity_events', function () {
-            return Activity::select('event')->distinct()->pluck('event')->toArray();
-        });
-
+        $events = Activity::select('event')->distinct()->pluck('event')->toArray();
 
         $logs = Activity::query()
             ->select(['id', 'description', 'event', 'subject_type', 'subject_id', 'causer_id', 'properties', 'created_at']) // Specify needed columns
