@@ -1,6 +1,6 @@
 <?php
 
-namespace Nsd7\LaravelActivitylogUi\Http\Controllers;
+namespace Teikun86\LaravelActivitylogUi\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Spatie\Activitylog\Models\Activity;

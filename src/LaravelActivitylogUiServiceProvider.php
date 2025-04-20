@@ -1,6 +1,6 @@
 <?php
 
-namespace Nsd7\LaravelActivitylogUi;
+namespace Teikun86\LaravelActivitylogUi;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
@@ -19,5 +19,9 @@ class LaravelActivitylogUiServiceProvider extends ServiceProvider
     public function register()
     {
         // Register package resources or bindings if necessary
+        $this->mergeConfigFrom(__DIR__ . '/../config/config.php', 'activitylog-ui');
+        $this->publishes([
+            __DIR__ . '/../config/config.php' => config_path('activitylog-ui.php'),
+        ], 'laravel-activitylog-ui-config');
     }
 }
